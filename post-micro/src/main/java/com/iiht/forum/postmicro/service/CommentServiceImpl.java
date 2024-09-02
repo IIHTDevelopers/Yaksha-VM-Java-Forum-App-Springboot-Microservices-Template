@@ -58,25 +58,25 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public CommentDetailDto addComment(CommentDto comment, Integer postId, Integer userId) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addComment'");
+		return null;
 	}
 
 	@Override
 	public CommentDetailDto getComment(Integer commentId) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getComment'");
+		return null;
 	}
 
 	@Override
 	public Integer addLike(Integer commentId) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addLike'");
+		return null;
 	}
 
 	@Override
 	public List<CommentDetailDto> getComments(Integer postId) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getComments'");
+		return null;
 	}
 
 }
