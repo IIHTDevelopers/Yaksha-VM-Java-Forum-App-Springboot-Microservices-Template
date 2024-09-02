@@ -36,53 +36,68 @@ public class CommentControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@MockBean
 	private CommentService commentService;
-	
+
 	@Test
 	public void post_TestAddComment() throws Exception {
-		CommentDto commentDto = MasterData.getCommentDto();
-		CommentDetailDto commentDetailDto = MasterData.getCommentDetailDto();
-		when(this.commentService.addComment(commentDto, 1,commentDetailDto.getCommentedByUser().getId())).thenReturn(commentDetailDto);
-				RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/comment/add/" + commentDetailDto.getCommentedByUser().getId())
-				.content(MasterData.asJsonString(commentDto))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON);
-				
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		 
-		yakshaAssert(currentTest(), 
-				(result.getResponse().getContentAsString().contentEquals(asJsonString(commentDetailDto))? "true" : "false"),	
-				businessTestFile);
-		
+		try {
+			CommentDto commentDto = MasterData.getCommentDto();
+			CommentDetailDto commentDetailDto = MasterData.getCommentDetailDto();
+			when(this.commentService.addComment(commentDto, 1, commentDetailDto.getCommentedByUser().getId()))
+					.thenReturn(commentDetailDto);
+			RequestBuilder requestBuilder = MockMvcRequestBuilders
+					.post("/api/comment/add/" + commentDetailDto.getCommentedByUser().getId())
+					.content(MasterData.asJsonString(commentDto))
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON);
+
+			MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+			yakshaAssert(currentTest(),
+					(result.getResponse().getContentAsString().contentEquals(asJsonString(commentDetailDto)) ? "true"
+							: "false"),
+					businessTestFile);
+		} catch (Exception e) {
+			yakshaAssert(currentTest(),
+					"false",
+					businessTestFile);
+		}
 	}
+
 	@Test
 	public void post_TestAddCommentBDD() throws Exception {
-		final int count[] = new int[1];
-		CommentDto commentDto = MasterData.getCommentDto();
-		CommentDetailDto commentDetailDto = MasterData.getCommentDetailDto();
-		when(this.commentService.addComment(commentDto, 1,commentDetailDto.getCommentedByUser().getId())).then(new Answer<CommentDetailDto>() {
+		try {
+			final int count[] = new int[1];
+			CommentDto commentDto = MasterData.getCommentDto();
+			CommentDetailDto commentDetailDto = MasterData.getCommentDetailDto();
+			when(this.commentService.addComment(commentDto, 1, commentDetailDto.getCommentedByUser().getId()))
+					.then(new Answer<CommentDetailDto>() {
 
-			@Override
-			public CommentDetailDto answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
-				count[0]++;
-				return commentDetailDto;
-			}
-		});
-				RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/comment/add/" + commentDetailDto.getCommentedByUser().getId())
-				.content(MasterData.asJsonString(commentDto))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON);
-				
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		 
-		yakshaAssert(currentTest(), 
-				count[0] == 1? true : false,	
-				businessTestFile);
-		
-	
+						@Override
+						public CommentDetailDto answer(InvocationOnMock invocation) throws Throwable {
+							// TODO Auto-generated method stub
+							count[0]++;
+							return commentDetailDto;
+						}
+					});
+			RequestBuilder requestBuilder = MockMvcRequestBuilders
+					.post("/api/comment/add/" + commentDetailDto.getCommentedByUser().getId())
+					.content(MasterData.asJsonString(commentDto))
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON);
+
+			MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+			yakshaAssert(currentTest(),
+					count[0] == 1 ? true : false,
+					businessTestFile);
+		} catch (Exception e) {
+			yakshaAssert(currentTest(),
+					"false",
+					businessTestFile);
+		}
 	}
-	
+
 }
