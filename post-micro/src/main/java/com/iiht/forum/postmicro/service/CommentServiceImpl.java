@@ -30,31 +30,7 @@ public class CommentServiceImpl implements CommentService {
 		this.proxy = proxy;
 		
 	}
-	
-	// @Override
-	// public CommentDetailDto addComment(CommentDto comment, String postId, String userId) {
-	// 	// TODO Auto-generated method stub
-	// 	return null;
-	// }
-
-	// @Override
-	// public CommentDetailDto getComment(String commentId) {
-	// 	// TODO Auto-generated method stub
-	// 	return null;
-	// }
-
-	// @Override
-	// public Integer addLike(String commentId) {
-	// 	// TODO Auto-generated method stub
-	// 	return null;
-	// }
-
-	// @Override
-	// public List<CommentDetailDto> getComments(String postId) {
-	// 	// TODO Auto-generated method stub
-	// 	return null;
-	// }
-
+		
 	@Override
 	public CommentDetailDto addComment(CommentDto comment, Integer postId, Integer userId) {
 		// TODO Auto-generated method stub
