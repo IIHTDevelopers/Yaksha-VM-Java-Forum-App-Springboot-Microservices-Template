@@ -29,7 +29,7 @@ public class CommentController {
 		return null;
 	}
 	
-	@GetMapping("/like/{commentId}")
+	@PostMapping("/like/{commentId}")
 	public ResponseEntity<Integer> addLike(@PathVariable("commentId") String commentId){
 		// write your logic here
 		return null;
