@@ -44,7 +44,7 @@ public class PostController {
 		return null;
 	}
 	
-	@GetMapping("/like/{postId}")
+	@PostMapping("/like/{postId}")
 	public ResponseEntity<Integer> addLike(@PathVariable("postId") String postId){
 		// write your logic here
 		return null;
